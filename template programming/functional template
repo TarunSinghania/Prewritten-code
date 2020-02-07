@@ -1,0 +1,5 @@
+template <class T > void add_num(T a, T b) {
+	
+cout<<a+b<<endl;
+
+}

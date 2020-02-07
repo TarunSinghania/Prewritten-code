@@ -1,0 +1,36 @@
+ 			
+
+A priority queue is an abstract datatype. It is a shorthand way of describing a particular interface and behavior, and says nothing about the underlying implementation.
+
+A heap is a data structure. It is a name for a particular way of storing data that makes certain operations very efficient.
+
+It just so happens that a heap is a very good data structure to implement a priority queue, because the operations which are made efficient by the heap data strucure are the operations that the priority queue interface needs.
+
+
+
+Binary Heap
+
+A Binary Heap is a Binary Tree with following properties.
+1) It’s a complete tree (All levels are completely filled except possibly the last level and the last level has all keys as left as possible). This property of Binary Heap makes them suitable to be stored in an array.
+
+2) A Binary Heap is either Min Heap or Max Heap. In a Min Binary Heap, the key at root must be minimum among all keys present in Binary Heap. The same property must be recursively true for all nodes in Binary Tree. Max Binary Heap is similar to MinHeap.
+
+
+
+
+
+
+
+FIBONAACI HEAP
+
+
+1) Find Min:      Θ(1)     [Same as both Binary and Binomial]
+2) Delete Min:    O(Log n) [Θ(Log n) in both Binary and Binomial]
+3) Insert:        Θ(1)     [Θ(Log n) in Binary and Θ(1) in Binomial]
+4) Decrease-Key:  Θ(1)     [Θ(Log n) in both Binary and Binomial]
+5) Merge:         Θ(1)     [Θ(m Log n) or Θ(m+n) in Binary and
+                            Θ(Log n) in Binomial]
+
+
+
+

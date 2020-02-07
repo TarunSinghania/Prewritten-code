@@ -1,0 +1,7 @@
+ m[i][j] =  1.0*j/(i+j) + 1.0*i/(i+j)*(i-1)/(i+j-1)*m[i-2][j];
+
+
+ while using ternary 
+ (i>1) 30 :12 ;
+
+ return 30 if i>1 else return 20 

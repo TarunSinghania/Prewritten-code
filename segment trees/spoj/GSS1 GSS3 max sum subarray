@@ -1,0 +1,177 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+#define ll long long
+#define fr(i,a,b) for(int i =a ; i < b; i++)
+#define fre(i,a,b) for(int i =a ; i <= b; i++)
+#define fra(s) for(auto it = s.begin(); it != s.e() ; ++it)
+
+#define mkp make_pair 
+#define pb push_back
+#define pii pair<int,int>
+#define speed   ios::sync_with_stdio(false), cin.tie(0) , cout.tie(0)
+#define c(a,b) cout<<a<<"--"<<b<<endl;
+#define frv(i,a,v) for(int i =  a ; i < v.size() ; ++i)
+#define cp(a,i)  cout<<a[i].first<<" "<<a[i].second<<endl;
+#define mp(a) cout<<a->first<<" "<<a->second<<endl;
+//sum array
+
+
+   
+//ss suffix sum
+//ps prefix sum
+//ms max sum
+struct node
+{
+    int sum,ps;
+    int ss,ms;
+};
+ 
+node t[4*50010];
+int arr[50010];
+
+void bu(int id,int s,int e)
+{
+    if(s == e)
+    {
+        t[id].sum = arr[s];
+        t[id].ps = arr[s];
+        t[id].ss = arr[s];
+        t[id].ms = arr[s];
+    }
+    else
+    {
+        int m = (s+e)/2;
+        bu(2*id+1,s,m);
+        bu(2*id+2,m+1,e);
+ 
+    
+        t[id].sum =
+            t[2*id+1].sum + t[2*id+2].sum;
+        t[id].ps =
+            max(t[2*id+1].ps,
+                t[2*id+1].sum + t[2*id+2].ps);
+        t[id].ss =
+            max(t[2*id+2].ss,
+                t[2*id+2].sum + t[2*id+1].ss);
+        t[id].ms =
+            max(t[id].ps,
+                max(t[id].ss,
+                    max(t[2*id+1].ms,
+                        max(t[2*id+2].ms,
+                            t[2*id+1].ss
+                            +t[2*id+2].ps
+                           )
+                       )
+                   )
+               );
+    }
+}
+ 
+
+node qu(int id,int s,int e,int l,int r)
+{
+    node result;
+    result.sum=result.ps=INT_MIN;
+    result.ss=result.ms=INT_MIN;
+ 
+    if(r<s || e<l)
+        return result;
+    if(l<=s && e<=r)
+        return t[id];
+ 
+    int m = (s+e)/2;
+    if (l > m)
+        return qu(2*id+2, m+1, e, l, r);
+    if (r <= m)
+        return qu(2*id+1, s, m, l, r);
+ 
+    node left = qu(2*id+1,s,m,l,r);
+    node right = qu(2*id+2,m+1,e,l,r);
+ 
+    result.sum = left.sum + right.sum;
+    result.ps =
+        max(left.ps, left.sum + right.ps);
+    result.ss =
+        max(right.ss, right.sum + left.ss);
+    result.ms =
+        max(result.ps,
+            max(result.ss,
+                max(left.ms,
+                    max(right.ms,
+                        left.ss + right.ps))));
+    return result;
+}
+void up ( int id , int s ,int e , int l ,int k )
+{
+
+if(s == e)
+    {   arr[s] = k ;
+        t[id].sum = arr[s];
+        t[id].ps = arr[s];
+        t[id].ss = arr[s];
+        t[id].ms = arr[s];
+    }
+else
+{
+
+        int m = (s+e)/2;
+        if(l<=m)
+        up(2*id+1,s,m,l,k);
+    else
+        up(2*id+2,m+1,e,l,k);
+ 
+    
+        t[id].sum =
+            t[2*id+1].sum + t[2*id+2].sum;
+        t[id].ps =
+            max(t[2*id+1].ps,
+                t[2*id+1].sum + t[2*id+2].ps);
+        t[id].ss =
+            max(t[2*id+2].ss,
+                t[2*id+2].sum + t[2*id+1].ss);
+        t[id].ms =
+            max(t[id].ps,
+                max(t[id].ss,
+                    max(t[2*id+1].ms,
+                        max(t[2*id+2].ms,
+                            t[2*id+1].ss
+                            +t[2*id+2].ps
+                           )
+                       )
+                   )
+               );
+
+
+}
+
+}
+
+
+int main()
+{
+    speed;
+    int n,m,a,b,c;
+    cin>>n;
+    // 1 to n is given indices we store in 0 to n-1 
+    //tree starts from node 0 1 2 ...
+    for(int i=0; i<n; ++i)
+        cin>>arr[i];
+ 
+    bu(0,0,n-1);
+ 
+    cin>>m;
+ 
+    for(int i=0; i<m; ++i)
+    {
+        cin>>c>>a>>b;
+    if(c)
+    cout<<qu(0,0,n-1,a-1,b-1).ms<<endl;
+    else
+        up(0,0,n-1,a-1,b);
+    }
+
+    return 0;
+}
+ 
+

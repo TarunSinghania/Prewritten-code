@@ -1,0 +1,60 @@
+unorerder map
+
+
+hashmap
+0(1)
+memory high 
+custom hashsws
+
+
+functions available
+.find() 0(1)
+.insert()  o(1)
+
+
+
+
+
+
+Unordered Map
+Unordered maps are associative containers that store elements formed by the combination of a key value and a mapped value, and which allows for fast retrieval of individual elements based on their keys.
+
+In an unordered_map, the key value is generally used to uniquely identify the element, while the mapped value is an object with the content associated to this key. Types of key and mapped value may differ.
+
+Internally, the elements in the unordered_map are not sorted in any particular order with respect to either their key or mapped values, but organized into buckets depending on their hash values to allow for fast access to individual elements directly by their key values (with a constant average time complexity on average).
+
+unordered_map containers are faster than map containers to access individual elements by their key, although they are generally less efficient for range iteration through a subset of their elements.
+
+Unordered maps implement the direct access operator (operator[]) which allows for direct access of the mapped value using its key value as argument.
+
+
+
+Internal Implementation :
+
+std::map Internally store elements in a balanced BST. Therefore, elements will be stored in sorted order of keys.
+
+std::unordered_map store elements using hash table.
+
+
+
+Memory Usage :
+
+Memory usage is more in unordered_map as compared to map because unordered_map need space for storing hash table too.
+
+
+Time Complexity for Searching element :
+
+Time complexity for searching elements in std::map is O(log n). Even in worst case it will be O(log n) because elements are stored internally as Balanced Binary Search tree (BST).
+
+Whereas, in std::unordered_map best case time complexity for searching is O(1). Where as, if hash code function is not good then, worst case complexity can be O(n) (In case all keys are in same bucket).
+
+
+Using user define objects as Keys :
+
+For std::map to use user defined object as keys, we need to override either < operator or pass external comparator i.e. a functor or function pointer that can be used by map for comparing keys.
+
+Where as, For std::unordered_map we need to provide definition of function std::hash<K> for our key type K. Also we need to override == operator.
+
+Check following article for detailed explanation :
+
+
