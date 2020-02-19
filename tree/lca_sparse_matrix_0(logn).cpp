@@ -38,7 +38,6 @@ void preprocess(){
     fr(i,1,v+1){
         p[i][0]=par[i];
     }
-    p[1][25]=-1;
 
     for(int j = 1; (1<<j) < v ; j++){
         for(int i = 1 ; i <= v ; i++){
@@ -57,12 +56,20 @@ int lca(int u,int v)
 
     int d = l[u]-l[v];
     
-    while(d>0)
-    {
-        int raise_by = log2(d);
-        //ore use last set bit index -1
-        u = p[u][raise_by];
-        d-=(1<<raise_by);   
+    // while(d>0)
+    // {
+    //     int raise_by = log2(d);
+    //     //ore use last set bit index -1
+    //     u = p[u][raise_by];
+    //     d-=(1<<raise_by);   
+    // }
+    // we are raising till height d
+    for(int i = MAX_LOG; i >=0 ; i--)
+    {   
+        if(d>>i&1)
+        {
+            u  = p[u][i];
+        }
     }
     if(u==v)
         return u;
