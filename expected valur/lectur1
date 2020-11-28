@@ -1,0 +1,152 @@
+expected value :
+The expected value (EV, expectation) is the average value of an event/experiment. For example, EV of the number of pips rolled on a 6-sided die is 3.5:
+
+
+	
+e(x + y) = e(x)  + e(y);(wont work for multiply, divide) sub will work
+both dependent and indenpendent events
+
+for independent evets proof;
+
+= {{(x + y)pxy(x,y)
+  y x
+
+= { { x pxy(x,y)  +  { { y pxy(x,y)
+  x y				x y
+
+= { x { pxy(x,y)  +
+   x    y
+
+= { x px(x)       +
+  x
+= E(X)            + E(Y)
+
+EV easy problems:
+
+problem 1: expected number of aces in two draws 
+
+
+=(1/13*3/51)*2  +(1/13*48/51) + (12/13*4/51)
+
+=6 + 48 + 48 /13*51
+=102/ 13*51 = 2/13 
+
+= (1/13)[3/51 + 48/51]    +  3/51*1/13  + 12/13*4/51
+= 						  +  1/13(3/51+ 48/51)
+		or
+
+=1/13 + 1/13 
+
+
+for each event to take place be it independent or dependent, the other events overall sum of probaility function will be one, (if dependent individual valude in the propapibilty function will change but sum will be 1)
+
+
+problem 2: Inflation The price of a tv is 1000$. Each of the next N days, the prices goes up by 5$ or 10$ (each with p-bility 50%). Find EV of the final price.
+
+
+
+ = 1000 + (7.5 + 7.5 + 7.5 .. n)
+
+
+
+problem 3: Max of two You roll a 6-sided die twice. Find EV of the bigger of two scores.
+
+
+ =  1/36( 1*1 + 2*3 + 3*5 + ..)
+or 1 *(1/36)  + 2 *(3/36) + 3*(5/36)
+= r*((r/6)^2 - ((r-1)/6)^2)
+
+
+problem 4:Max of N You roll a 6-sided die N times. Find EV of the biggest score.
+A few possible solutions
+
+= r*((r/6)^n - ((r-1)/6)^n)
+
+
+problem 5: Birthdays,  You teach informatics in a class with 20 students. When someone has a birthday, you must let the whole class to play games instead of learning algorithms and using Excel. Maybe some students have birthday on the same day, so there would be fewer than 20 wasted days during a year? Find EV of the number of days when at least one student has birthday.
+Bonus/fact: Birthday paradox.
+
+=365*(1-(364/365)^20)
+
+
+problem 6: First heads ,Find EV of the number of coin tosses until you get heads.
+How to check your answer with a program?
+
+= 1/2* + 1/4*2  + 1/8*3 + 1/16*4 + 1/32*5 ...
+
+= 1/2 + 1/4 + 1/8 ..
+	  + 1/4 + 1/8 ..
+	  	    + 1/8 ..
+= 1 + 1/2 + 1/4 ...
+= 2
+
+problem 7: Two heads Find EV of the number of coin tosses until you get heads two times in total.
+
+= 2 + 2 = 4
+
+
+problem 8: Two heads in a row Find EV of the number of coin tosses until you get heads two times in a row.
+
+
+problem 9: Volleyball 12 teams, including Poland, play in the volleyball tournament. Teams are divided into 4 groups, each with 3 teams. In each group, every team plays against every other team, and then two best teams advance to the elimination stage. In case of a perfect tie, two random teams advance. The elimination stage has quarterfinals, semifinals and the final match. In every match, a random of two teams wins (50% each).
+Find p-bility that Poland will win the whole tournament. Find EV of the number of matches won by Poland. Find EV of the number of matches won by Poland, assuming that they won the whole tournament (in other words, find EV of the number of matches won by the winner of the whole tournament).
+
+
+= 38 match slots = out of 12 teams = 38/12 
+
+
+
+
+Problems for "contribution" technique
+
+
+1.Hills Given a sequence of length N (N ≤ 105), count triples of indices i < j < k that ai < aj > ak.
+Bonus: Count zig-zags of length 10, i.e. i1 < i2 < ... < i10 that a[i1] < a[i2] > a[i3] < a[i4] > ... < a[i10]
+
+
+iterate over middle element + segement trees + coodridnate compression
+
+
+2.Paths in tree Given a tree of length N (N ≤ 105), find the sum of lengths of all paths. (Solve this without not-trivial dp or centroids.)
+
+for each edge (no of nodes in one side * no of nodes to othwe side)
+
+
+3.Sum over subsets There are N competitions, the i-th with prize ai. You're quite good and you will win each competition with p-bility 50%. Find EV of the total won prizes.
+Equivalently: Find the sum over total prize over all 2N possibilities, and print answer modulo 109 + 7. (This answer divided by 2N gives the answer from the first version.).
+
+
+= a[1] + a[2] + a[3] / 2*n 
+
+4.Math encoder (Code Jam Kickstart 2017 round B) You are given a sequence of N numbers (N ≤ 2000 or N ≤ 105). We're to choose one of 2N - 1 non-empty subsets, uniformly at random. Find EV of the difference between the maximum and minimum element in the subset.
+Equivalently: Find the sum over the difference over all subsets, and print the answer modulo 109 + 7.
+
+
+n is 2000
+ for ever pair of numbers calulate its contribution 
+
+  2^(number of elemts in between a pair)(pair biggger num - pair smallernum )
+
+ add all / nc2
+
+
+
+e (max - min) =  e(max) - e(min)
+
+
+5.Imbalanced array (CF Educational Round 23) Same as the previous problem, but choose a random of N·(N + 1) / 2 intervals.
+Bonus: Do it in O(N) if the input contains a permutation of numbers 1 through N.
+
+e(max) - e(min)
+for each num
+hoow many interval is a number maximum
+
+also sub 
+how many interval is this number minimum
+
+
+6.Randomizer (CF 313 D) You're given a convex polygon with N vertices (N ≤ 2000 or N ≤ 105). We choose a random subset of vertices, what gives us a new (small) convex polygon. Find EV of the perimeter of the new polygon.
+Well, the CF problem was a bit harder, with computing area and using Pick's theorem.
+
+ev(perimiter) = ev(each edge contibutes) = for each edge(1/4(it gets selcted))..
+see video 

@@ -100,6 +100,36 @@ ll ncr(ll n,ll r)
     ans = (ans*(mi(f[r])%MOD))%MOD;
     return ans;
 }
+
+
+checkk int version:
+
+int fact[MAX];
+int inv[MAX];
+
+
+int mod_pow(int n, int k) {
+    if (k == 0) return 1;
+    int res = mod_pow(n, k >> 1);
+    res = (1ll * res * res) % MOD;
+    if (k & 1) res = 1ll * res * n % MOD;
+    return res;
+}
+inline int ncr(int n, int k) {
+    if (k > n) return 0;
+    return 1ll * fact[n] * inv[k] % MOD * inv[n - k] % MOD;
+}
+void init(){
+  int n = MAX;
+  fact[0] = 1;
+
+    for (int i = 1; i <= n; i++) {
+        fact[i] = (1ll * fact[i - 1] * i) % MOD;
+    }
+
+    for (int i = 0; i <= n; i++) inv[i] = mod_pow(fact[i], MOD - 2);
+
+}
 int main()
 {
 

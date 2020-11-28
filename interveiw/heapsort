@@ -1,0 +1,3 @@
+heapsort is nothing basically creating a heap it takes 0(n);
+afer that take out minimum 
+and then pop one by one

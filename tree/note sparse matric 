@@ -1,0 +1,52 @@
+let two colour of nodes be possible,in a tree 1,0
+we have to find the number of 1 colour nodes in simple path from x to y 
+
+// we have calclulate p[i][j] parent of i at 2^j height 
+	init() p[i][j]=-1;
+	p[i][0] = par[i];
+	use the recursion
+	p[i][j]=p[p[i][j-1]][j-1]
+
+//if we want at 10 th parent ...binary 1010
+  for(int x = MAX_LOG; x >=0 ; x--)
+    {   
+        if((j>>x)&1)
+        {
+            i  = p[i][x];
+        }
+    }
+ans = i;
+// i--> x = p[i][3] ---> y = p[x][1]---> ans = y;
+//if we want 0th parent binary 0000
+//-->loo doesnt run ans = i
+
+
+cnt[i][j]...stores the number of colour 1 node from i node to 2^j th node above it exluding colour of i node
+
+this helps us use the property
+
+	cnt[i][j] = cnt[i][j-1] +cnt[p[i][j-1]][j-1] 
+
+	1---2-----3-----4-----5------6----7---8--9
+	1   1     1     1     1      1   1    1  1
+
+	cnt[1][2] = 4 ( node 2 + node 3+ node 4+ node 5)// node 1 is not included
+	cnt[5][2] = 4 (node 6,7,8,9)//node 5 not included
+
+	cnt[1][3] = cnt[1][2] + cnt[5][2] //not including the base node prevents duplicate counting of node 5 
+			  = 8;
+
+
+	if we have to see number of one nodes from 1 t0 9
+	assuming 1 is at low level then 9 = dis = lev[1] - lev[9] = 8;
+  	for(int x = MAX_LOG; x >=0 ; x--)
+    {   
+        if((j>>x)&1)
+        {
+        	ans += cnt[i][x];
+            i  = p[i][x];
+        
+        }
+    }
+	colour[i]==1?ans += 1:ans+=0;
+

@@ -15,3 +15,14 @@ inline int mul(int x,int y)
 {
     return 1LL * x * y % mod;
 }
+
+
+ll add(ll x,ll y){
+	return (x+y)%MOD;
+}
+ll sub(ll x,ll y){
+	return (x-y+MOD)%MOD;
+}
+ll mul(ll x,ll y){
+	return (x*y)%MOD;
+}

@@ -19,7 +19,7 @@
     }
     vector<pair<int,int> > vp;
     fr(i,0,n){
-        vp.push_back(make_pair(mp[vp[i].first],mp[vp[i].second]));
+        vp.push_back(make_pair(mp[p[i].first],mp[p[i].second]));
     }   
 
 

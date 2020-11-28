@@ -1,0 +1,57 @@
+Geting the basics clear first:
+
+Independent set:
+
+A set of nodes in graph such that there is no edge in between any two nodes in the set.
+
+
+Clique:
+
+A set of nodes in graph such that there is a edge in between any two nodes in the set.
+
+
+
+Maximal independent set:
+
+A set of nodes in graph which is an independent set, and addition of any other node in the set will lead to breaking of maximal independent set.
+
+
+
+
+
+Maximal Clique:
+
+A set of nodes in graph which is an clique,and addition of any other node in the set will lead to breaking of maximal cliques
+
+
+There can be multiple maximal cliques, and maximal independent sets.
+
+
+Maximum Independent set:
+largest maximal independent set.
+
+Maximum Clique: (NP Complete)
+largest maximal clique
+
+
+
+
+Cliques and  independent set relation :
+
+
+Take a graph and its complement
+, a maximal independent set in a graph is a maximal clique in it's complement.
+also viecersa true.
+
+35.5 20
+40
+
+52 bnus
+50 stocks
+
+
+46k 
+stocks 
+
+35
+53

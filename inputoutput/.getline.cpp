@@ -13,3 +13,14 @@ void main()
    cin.getline( line, 100, 't' );
    cout << line;
 }
+
+
+use cin.igonre();
+if using getline after taking an integer input
+
+ex:
+int n;
+string s;
+cin>>n;
+cin.ignore();
+getline(cin,s);

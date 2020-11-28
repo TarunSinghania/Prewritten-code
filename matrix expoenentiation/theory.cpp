@@ -88,6 +88,7 @@ Thus we can find the first row of matrix M is [1 1]. Similarly, let, the 2nd row
 ⇒ x = 1, y = 0
 
 Thus we get the second row of M is [1 0].
+
 Type 2:
 Now, we make it a bit complex: find f(n) = a * f(n-1) + b * f(n-2), where a, b are some constants.
 This tells us, f(n+1) = a * f(n) + b * f(n-1).
@@ -231,7 +232,7 @@ How about we multiply M multiple times? Like this:
 M x M x |  f(n)  | = | f(n+1) |
         | f(n-1) |   |  f(n)  |
 
-Replacing from (1):
+Replacin g from (1):
 
 M x M x |  f(n)  | = M x | f(n+1) | = | f(n+2) |
         | f(n-1) |       |  f(n)  |   | f(n+1) |

@@ -30,7 +30,7 @@ void parent(int n,int b,int le){
         if(!par[x])
             parent(x,n,le+1);
 }
-void preprocess(){
+ void preprocess(){
     parent(1,-1,0);
     fr(i,1,v+1)
         fr(j,1,MAX_LOG+1)

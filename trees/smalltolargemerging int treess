@@ -1,0 +1,115 @@
+
+MERGE SORT TREEE had each node store sorted values of the values in the subtree of that node
+
+	the time complecity to build such a data structure was n log n 
+
+	Proof : 
+	
+	fIrst we need to see : 
+	merging two nodes of length x and y means making a new node of lenggth of x+ y with time complexity x+y 
+	 
+	therefore 
+
+	each node taking one comparison before beign used
+	
+
+	and each node being used in at max log n nodes therfore the max number of operations needed are n*log n
+
+
+However in a normal tree like below if we are stroing the sorted values in the subtree of that node then it will be 0(n*n);
+
+take a case like below:
+
+
+
+    		      		  1 (1,2,3,4,5,6,7,8,9,10)
+    			 		 /
+    					 2 (3,4,5,6,7,8,9,10)
+    		  	 		/ \	
+	  (3,4,5,6,8,9,10) 3  7 (7)
+    		 		   / \
+   	(4,5,6,9,10)      4   8(8)
+    	   			 / \
+    (5,6,10)		 5	9(9)
+    	 			/ \
+    		(6)		6  10(10)
+
+
+here merging two  or more childs of a node in a single node would take 0(n*k) wherre n is the sum of all childs and k is the number of childs using a min heap ( merging k sorted vectors using a min heap o(elements*log(number of vectors vectors))
+
+
+here is the merging factor for each element in a tree log(2);
+
+
+element like 6 is coming up 5 times....so if depth of tree is n/2
+
+then n/2 + n/2 -1 + n/2 -2 ...
+	will give n*n
+
+	total complexity will be o(n*n log 2)
+
+
+
+
+How to overcome this :
+
+Use small to large merging 
+
+	in each node store a map of values 
+	map<value,count> 
+
+	while merging merge small nodes to large nodes 
+	and then swap it to the elder child location in 0(1);
+
+
+
+	  		  			  1 	
+    			 		 /
+    					 2 (
+    		  	 		/ \	
+	  (3,4,5,6,8,9,10) 3  7 (7)
+    		 		   / \
+   				      4   8
+    	   			 / \
+    				 5	9
+    	 			/ \
+    				6  10
+
+
+example merging node 3 and 7 both have a map stored ,now er move 7 and store in in map of 3 
+ 						 1 	
+    			 		 /
+    					 2 
+    		  	 		/ \	
+	  (3,4,5,6,7,8,9,10) 3  7 
+    		 		   / \
+   				      4   8
+    	   			 / \
+    				 5	9
+    	 			/ \
+    				6  10
+
+
+then swap map of nodes 2 and 3 in o(1)
+
+						1 	
+    			 		 /
+    					 2 (3,4,5,6,7,8,9,10)
+    		  	 		/ \	
+	  					3  7 
+    		 		   / \
+   				      4   8
+    	   			 / \
+    				 5	9
+    	 			/ \
+    				6  10
+
+
+
+time complexity prrof : each element of size x  going into element of size2*x or greater 
+
+
+and max size if 0(n)
+
+
+max merging for each element is 0(log*n);

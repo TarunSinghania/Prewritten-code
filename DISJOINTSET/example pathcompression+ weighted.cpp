@@ -45,6 +45,10 @@ void initialize(int N)
 
 int root(int i)
 {
+
+    // While computing the root of A, set each i to point to its grandparent (thereby halving the path length), where i is the node which comes in between path, while computing root of A.
+    //this helps reduce the log n factor to log*n which is essectially  the iterative function which computes the number of times you have to take log of N till the value of N doesn’t reaches to 1. 
+    //log*N is much better than log N, as its value reaches at most up to 5 in the real world.
     while(Arr[ i ] != i)
     {
         Arr[ i ] = Arr[ Arr[ i ] ] ; 
@@ -60,7 +64,7 @@ void weighted_union(int A,int B)
 {
     int root_A = root(A);
     int root_B = root(B);
-
+    //small to large concept helps at keeping max log n size of tree
       //cout<<root_A<<"--"<<root_B<<endl;
   if(root_A == root_B)
     {

@@ -1,0 +1,97 @@
+n vertices  n-1 edges
+connected undirected graph + on cycles
+only unique paths
+remove any edge the graph becomes disconnected.
+
+diametere = longest of the shortest paths in a graph.
+on trees : longest path in a tree.
+
+o(n^2)= find all endpoints + run bfs 
+
+rooted tree= digraph where edges directed away from root;
+
+
+how many diameters in a node ?
+count number of diameters ?
+
+
+center:
+
+remoteness of a node : its distance from its farthest node
+	center of a tree is a node that minimises remoteness
+
+there can be multiple centres 
+https://youtu.be/2PFl93WM_ao
+
+
+how to find centers :
+keep of deleting leavees recursively 
+
+
+Theorem : all diamters of a tree must go though all centers of the tree
+
+
+proof : supoose some diamter does not go through c
+watch video 
+https://youtu.be/2PFl93WM_ao
+
+
+
+
+Theprem : There are at most two centers of a tree
+
+
+Centriod : 
+
+	node when removed minimises largest remaning component
+
+
+Is centriod always center :
+	
+	no 
+
+
+
+how to find centriod : 
+		root tree somewhere 
+		sybtree size function : 
+			
+		s = 1 if leaf
+			1 + summatino (s(child))
+
+		then again run dfs 
+		for each node:
+			for each child 
+			{
+				size of pieces are s(child)
+			}
+			and one above = n - s[node]
+			largest remaninf component from above
+		calculate node which has minimum remainig component
+
+
+
+
+properties of centroid : 
+
+
+	At most 2 centiod
+
+	remaing component <= [n/2] size;
+
+
+
+
+counting the numbers of diamters in a tree :
+{
+	worst cast maximum diameters in a tree
+		wheel graph 
+			n-1 c2 
+
+
+	(1 center)
+			see video 
+			https://youtu.be/2PFl93WM_ao
+	(2 centers case)
+		no of max depth in c1 *  no of max depth in c2
+}

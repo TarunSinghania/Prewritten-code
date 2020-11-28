@@ -26,7 +26,7 @@
   constexpr auto mod = 1000000007;
 
 
-  #define MOD 1000000007
+ #define MOD 1000000007
   #define maxv 200005
   #define mx 505
 struct cmp1
@@ -38,7 +38,7 @@ struct cmp1
 
 };
 
-    set< pair<int, int>,cmp1> v1;
+  set< pair<int, int>,cmp1> v1;
     
    
 
@@ -56,3 +56,104 @@ struct cmp1
 
     
   set<pair<ll,ll> > v;
+
+  //remember to always return false when two elements are equal or else they will
+  //get inserted multiple times
+  //struct comp{
+    bool operator()(const pair<int,int> &a,const pair<int,int> &b){
+      if(a.first==b.first)
+        //i used <= 2 times 7,2 will be inserted and find wont work
+        return (a.second<b.second);
+      else
+        return a.first<b.first;        
+    }
+};
+
+int main()
+{
+set<pair<int,int>,comp>s;
+s.insert({7,2});
+s.insert({7,2});
+for(auto x : s){
+  cout<<x.first<<" "<<x.second<<endl;
+}
+
+
+#include <bits/stdc++.h>
+using namespace std;
+#define fr(i,a,b) for(int i =a ; i < b; i++)
+
+struct comp{
+    bool operator()(const pair<int,int> &a,const pair<int,int> &b){
+      if(a.first==b.first)
+        return (a.second<=b.second);
+      else
+        return a.first<b.first;        
+    }
+};
+
+int main()
+{
+set<pair<int,int>,comp>s;
+s.insert({7,2});
+s.insert({7,2});
+for(auto x : s){
+  cout<<x.first<<" "<<x.second<<endl;
+}
+auto it = s.find({7,2});
+if(it == s.end())
+  cout<<"ne"<<endl;
+
+  return 0;
+}
+
+
+
+///reason insertion in set takes place using comparator or by default using <
+
+#include <bits/stdc++.h>
+using namespace std;
+#define fr(i,a,b) for(int i =a ; i < b; i++)
+struct t{
+  int a;  
+  t(int x){
+    a=x;
+  }
+
+  bool operator==(const t& rhs)const{
+    return a==rhs.a;
+  }
+  bool operator < (const t& rhs )const{
+      return a<=rhs.a;
+  }
+
+};
+
+int main()
+{
+ set<t>s2;
+
+ fr(i,0,10){
+  t t2 = t(i);
+  t t3 = t(i);
+
+  s2.insert(t2);
+  s2.insert(t3);
+  }
+
+for(auto x: s2){
+   cout<<x.a<<endl;
+}
+  return 0;
+}
+//
+//https://codeforces.com/blog/entry/9604
+//http://www.cplusplus.com/reference/algorithm/lexicographical_compare/
+//now less than < or comp would insert comparing a<b
+and where false
+it checks if!(a<b) && !(b<a)
+  if this is true that means elements are equal
+  or else 
+  it inserts
+
+

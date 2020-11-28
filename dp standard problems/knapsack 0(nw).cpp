@@ -59,7 +59,8 @@ void solve(){
   fr(i,1,n)
   {
     frj(j,0,W+1)
-    { int x =0,y=0;
+    {
+     int x =0,y=0;
       if(j-w[i]>=0)
       {
         x = mv[j-w[i]][i-1]+v[i];

@@ -1,77 +1,53 @@
 #include <bits/stdc++.h>
-using namespace std;
-#define fr(i,a,b) for(int i =a ; i < b; i++)
+
 #define ll long long
-#define speed   ios::sync_with_stdio(false), cin.tie(0) , cout.tie(0)
-#define all(v) v.begin(), v.end()
-#define prv(v)   for(auto it = v.begin() ; it!= v.end() ;++it){cout<<*it<<" ";}cout<<endl;
+#define pb push_back
+#define F first
+#define S second
+#define ld long double
+#define int long long 
 
-const int maxn = 1e5+10;
+using namespace std;
 
-vector<int> tree[4*maxn];
-int n, m, arr[maxn]; 
+const int MAXN = 1001 * 1001 , MOD = 1e9 + 7 ; 
 
-void build(int node, int l, int r) {
-  
-  if(l == r) {
-    tree[node].push_back(arr[l]);
-    return;
-  } 
-  //l and r less than 1e5 so no overflow
-  int m = l+(r-l)/2;
-  
-  build(2*node,l,m);
-  build(2*node+1,m+1,r);
-  
-  merge(all(tree[2*node]), all(tree[2*node+1]), 
-          back_inserter(tree[node]));
-  //cout<<node<<"#"<<endl;
-  //prv(tree[node]);
-}
+int a[MAXN] ; 
 
-int q1(int node, int l, int r, int i, int j, int k) {
-  //elements less than k 
-  if(i > r || l > j) return 0;
-  if(i <= l && r <= j) {
-    return lower_bound(all(tree[node]), k)- tree[node].begin();
-  } 
-  int m = l+(r-l)/2;
-  return q1(2*node, l, m, i, j, k) + 
-       q1(2*node+1, m+1, r, i, j, k);
-}
-int q2(int node, int l, int r, int i, int j, int k) {
-  //elements less than equal to  k 
-  if(i > r || l > j) return 0;
-  if(i <= l && r <= j) {
-    return upper_bound(all(tree[node]), k)- tree[node].begin();
-  } 
-  int m = l+(r-l)/2;
-
-  return q2(2*node, l, m, i, j, k) + 
-       q2(2*node+1, m+1, r, i, j, k);
-}
-
-int q3
-
-
-
-
-main()
+void solve(int s , int e , int x , vector<int> v )
 {
-    cin>>n>>m;
-    fr(i,0,n){
-        cin>>arr[i];
-        //cout<<arr[i]<<endl;
-        }
-
-    build(1,0,n-1);
-    fr(i,0,m)
-    {
-
-        int l,r,k;
-        cin>>l>>r>>k;
-        cout<<l<<r<<k<<endl;
-        cout<<q1(1,0,n-1,l-1,r-1,k)<<endl;
-
-    }
+  if(x==1)
+  {
+    for(int i = s ; i < e ; i ++ ) 
+      a[i] = v[i-s] ; 
+    return ;
+  }
+  int mid = (s+e) / 2 ; 
+  int l = mid - s , r = e - mid ; 
+  vector<int> v1 , v2 ; 
+  for(int i = 0 ; i < r ; i ++ ) v2.pb(v[i]) ; 
+  for(int i = r ; i < l + r ; i ++ ) v1.pb(v[i]) ; 
+  x -- ; 
+  if(x<=2*l)
+  {
+    solve(s,mid,x-1,v1) ; 
+    solve(mid,e,1,v2) ; 
+    return ; 
+  }
+  solve(s,mid,2*l-1,v1) ; 
+  solve(mid,e,x-(2*l-1),v2) ; 
 }
+
+int32_t main() 
+{
+  ios::sync_with_stdio(0) ; 
+  cin.tie(0) ;
+  int n , k ; 
+  cin >> n >> k ; 
+  if(k%2==0||k>2*n) return cout << -1 << endl , 0 ; 
+  vector<int> v ; 
+  for(int i = 1 ; i <= n ; i ++ ) v.pb(i) ; 
+  solve(0,n,k,v) ; 
+  for(int i = 0 ; i < n ; i ++ ) cout << a[i] << ' ' ;
+  cout << endl ; 
+}
+
