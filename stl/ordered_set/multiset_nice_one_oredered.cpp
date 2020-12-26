@@ -24,7 +24,6 @@
         mp[v[i]].push_back(i);
         }    
         cout << "Ordered Multiset: ";
-        
         for(auto x : ms) cout << x.first <<','<<x.second<<" "; cout << '\n';
         ms.erase(make_pair(1,1));
         for(auto x : ms) cout << x.first <<','<<x.second<<" "; cout << '\n';

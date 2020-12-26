@@ -1,0 +1,206 @@
+ford fulkerson - O(E * maxFlow)
+edmonds karp - O(E^2*V)
+
+min cost max matching
+
+
+Ford fulkerson 
+
+
+normal greedy algorithm to allot max flow from s to t in every step fails.
+
+
+     4            2   
+source->----2------->sink
+|           ^ 6      |
+----->------3------>-
+     2            2
+
+
+source --->3 ---->2----> sink takes 2 flow;
+
+
+no more flow to allocate 
+
+
+
+however best answer is too push source---->2---> sink + source ---> 3----> sink = 2 + 2 = 4
+
+
+
+To get the best answer, we need need to undo some flows, so every time we push forward a flow, we add a residual flow in the network 
+
+residual flow : flow opposite in direction to normal flow, shows undo capacity 
+
+
+when we undo a flow from u1 to u2 (we only do when we find a s-t path)
+
+what happens was there was some previos flow with some cap 
+
+	s--a--> u2 ------->u1-----b---->t
+
+
+which lead to a residual path like below 
+
+
+   s<-----u2<-----u1-----t
+
+
+   now you can additional flow to the algorithm 
+
+
+   s------y--->--u1------>u2----x----->--t
+
+
+
+   if you push inital flow s---a--->u2---------x--->t
+
+
+   and  the new flow     s---y---->u1------b--->t;
+
+
+
+
+Theorem:
+(Optimality Conditions for Maximum Flow)If f is a flow inG such that the residual networkGf has no s-t path, then the f is a maximum flow.
+
+
+
+
+Theorem:
+(Optimality Conditions for Max Flow)Letfbe  a  flow  in  a  graphG.The following are equivalent:
+(1)fis a maximum flow of G;
+(2) there is an(s,t)-cut(A,B)such that the value offequals the capacity of(A,B);
+(3)  there is nos-tpath (with positive residual capacity) in the residual networkGf.
+
+
+all flow capacties lie left, all cut capacties lie to right
+the one where they meet is max flow
+
+--f1--f2----f3---f4/c1---c2---c3---c4
+
+
+
+ (Max-Flow/Min-Cut Theorem)In every network,maximum value of a flow=minimum capacity of an(s,t)-cut.
+
+
+
+ 2==>1
+
+
+ a cut(a,b) has flow equals = net flow out of s
+
+    = net flow out of all vertices in cut a 
+
+    = sum of flow of edges sticking out of a - sum of flow of edges sticking in of a
+
+    all flows <= sum of cap of edges sticking out of a in a cut - 0
+
+
+    capacity of a cut = sum of capacticies of edges sticking out of a 
+
+
+
+3==>1 
+it is ovious, as long as we have a residual capacity in the network, we can augment the flow 
+but of no use
+
+
+we need to prove 1==>3
+
+we  will prove this by saying 3==>2 but 2==>1 so 3==>1 
+
+in (3)
+there is no st cut and we expand a any further, so all edges in residual graph from b to a
+
+that means in the original graph, all outward edges in the s tcut are saturated and all inward edges in the s t cut are zer0
+
+there for we have the max flow case in 2 
+
+when we have a graph with no residual capacity 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+edmonds karp
+
+
+//The algorithm runs in O(VE^2) time, even for irrational capacitie
+//edmond karps algorithm
+
+// we want to disconnect s and t in residual graph
+// in the max flow residual graph there is no st path 
+// biggest finite distance will se n-1
+// d(F) = distance between s and in t in current residual graph
+// d(F) never goes down in edmond karp algorithm 
+// d(F) increases at least once per m iterations 
+
+
+//proof
+
+obtain forward bfs graph (layered graph) for the current residual graph
+(layered graph) : bfs with back edges removed, (only forward edges)
+
+Newly created edges in layered graph, are form layer i + 1 to i
+therefore path never shrinks.
+
+
+Ref:
+A Second Course in Algorithms (Lecture 2: Augmenting Path Algorithms for Maximum Flow)
+https://www.youtube.com/watch?v=uM06jHdIC70&list=PLEGCF-WLh2RJh2yDxlJJjnKswWdoO8gAc&index=2&ab_channel=TimRoughgardenLectures
+
+
+as long as d(F) IS certain, each iteration zeroes out at least one edge.
+
+once some edges is zeroes it wont reappear.(on each iteration one edge will zeero out)
+
+at most m edges, and after that either s,t will be disconntected or their distance will increase by introduction of (a side edge, back edge)
+
+
+
+
+
+
+DINIC's alfotithm : 
+https://www.youtube.com/watch?v=uM06jHdIC70&t=4220s
+
+augmenting flow not just to one path but to multiple paths at once
+
+
+fe = 0 for all edges 
+
+while st path in residual graph exists 
+
+     construct layered graph 
+     from residual grpah (use bfs)
+
+     compute blocking flow in layered graph
+
+     augment f by g 
+
+
+what is blocking flow : 
+    just keep pushing flows untill the first greedy algo failed,
+    is a flow such that there is no more path between s and t , such that there is no more flow to augment.
+
+key lemma :
+  if g has a blocking flow in residiual grpah in gf , then after augmenting the grpah with with g , distance between s and t increases, 
+
+  so at max we have to compute blockking flow n times
+
+
+Dinic runtine = v*(blocking flow)
+
+blocking flow calc = e*v;

@@ -22,7 +22,7 @@ struct sss{
     tree_order_statistics_node_update> ordered_multiset;
 
 
-    int main() {
+int main() {
         ordered_multiset ms;
         vector<int> v{1, 1,3, 4, 5, 6, 6,7};
         unordered_map<int,vector<int> > mp;
@@ -44,6 +44,6 @@ struct sss{
 
 //The first returns an iterator to the k-th largest element (counting from zero), the second — the number of items in a set that are strictly smaller than our item
         return 0;
-    }
+}
 //working in codeforces
 //less comparator syntax used

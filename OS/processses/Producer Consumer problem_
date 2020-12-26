@@ -1,0 +1,28 @@
+Producer Consumer problem;
+
+int q[BUFF_SIZE];
+
+//p
+do{
+	
+	while(count == BUFF_SIZE-1);
+
+	q[in]=next_produced;
+	in=(in+1)%n;
+	count++;
+}while(true);
+
+
+
+
+
+//c
+
+do{
+		while(count == 0);
+
+		next_consumed = q[out];
+		out=(out+1)%n;
+		count--;
+}while(true);
+

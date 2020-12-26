@@ -1,0 +1,16 @@
+deadlock vs synchronisation
+
+syncho 
+
+1.mutual exclusion
+2.bounded wait 
+3.progress
+
+
+deadlock
+
+1.mutual exculsion
+2.hold and waiyt
+3.no premption
+4. circulair wait 
+
